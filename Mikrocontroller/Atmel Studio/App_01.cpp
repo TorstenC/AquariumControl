@@ -2,19 +2,19 @@
 
 uint16_t DimRampStepDuration = 1;	// Dauer pro Schritt in 100ms
 uint8_t DimRampTarget = 63;			// Ende der Dimmung (0 .. 63)
-uint8_t DimStepCount = 1;			// Countdown für DimRampSteps
+uint8_t DimStepCount = 1;			// Countdown fï¿½r DimRampSteps
 bool EVG_is_on = false;
 
 struct DimPoint {
 	HAL_Time Time;					// Start-Uhrzeit
 	uint8_t Target;					// Ende der Dimmung (0 .. 100)
-	uint8_t Duration;				// Dauer pro Schritt in 100ms, 100 Schitte á 25,5s = 255s = 4h 15 min
+	uint8_t Duration;				// Dauer pro Schritt in 100ms, 100 Schitte ï¿½ 25,5s = 255s = 4h 15 min
 };
 
 const DimPoint DimPoints[] = {{{06,10,00}, 100, 179}, \
-							  {{10,00,00},  54, 255}, \
-							  {{17,00,00}, 100, 255}, \
-							  {{21,50,00},   0, 255}};
+							  {{10,00,00},  54, 254}, \
+							  {{17,00,00}, 100, 254}, \
+							  {{21,50,00},   0, 254}};
 							  // 100, 179 = bis 06:40:00
 							  //  54, 255 = bis 10:19:37
 							  // 100, 255 = bis 17:19:37
@@ -85,7 +85,7 @@ void App_tick_100ms() {
 			UpDown = (UpDown == Up) ? Down : Up;		// Toggle Up/Down
 			ToggleUpDn = false;
 		}
-		// Wenn Dimmung läuft, ggf. Wert verändern
+		// Wenn Dimmung lï¿½uft, ggf. Wert verï¿½ndern
 		if (DimRampTarget != CurrentDimValue) {
 			if (!(DimStepCount--)) {
 				if (CurrentDimValue > DimRampTarget) {
